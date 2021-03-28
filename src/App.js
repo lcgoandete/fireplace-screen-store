@@ -1,14 +1,15 @@
 import Header from './components/Header';
-import ScreenOrder from './pages/ScreenOrder';
-import Footer from './components/Footer';
+import ProductScreen from './pages/ProductScreen';
 import './App.css';
+import { Switch, Route } from 'react-router';
 
 function App() {
   return (
     <div>
       <Header />
-      <ScreenOrder />
-      <Footer />
+      <Switch>
+        <Route to="/" component={ ProductScreen } />
+      </Switch>
     </div>
   );
 }
