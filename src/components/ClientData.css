@@ -1,0 +1,15 @@
+.client-data {
+  position: flex;
+  width: 338px;
+  height: 600px;
+  left: 11px;
+  bottom: 177px;
+}
+
+.input-client-data {
+  position: flex;
+  width: 325px;
+  height: 52px;
+  left: 5px;
+  top: 14px;
+}

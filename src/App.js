@@ -1,12 +1,14 @@
-import Product from './pages/Product';
 import Header from './components/Header';
+import ScreenOrder from './pages/ScreenOrder';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
   return (
     <div>
       <Header />
-      <Product />
+      <ScreenOrder />
+      <Footer />
     </div>
   );
 }
