@@ -1,3 +1,4 @@
+- [ ] criar layout no figma
 - [ ] criar produto dinamicamente
 - [ ] criar formulario de cliente
 - [ ] criar integracao do checkout mercadopago pro

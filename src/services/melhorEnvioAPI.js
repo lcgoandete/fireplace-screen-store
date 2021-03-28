@@ -1,8 +1,11 @@
-const pedido.frete = {
-  cepOrigem: "91510000",
-  cepDestino: document.getElementById("cep").value,
-  insuranceValue: 0,
-  services: "1,2,3,4" // 9-Rodoviário, 10-Próximo Dia, 17-Mini Envios
+
+const pedido = {
+  frete: {
+    cepOrigem: "91510000",
+    cepDestino: document.getElementById("cep").value,
+    insuranceValue: 0,
+    services: "1,2,3,4" // 9-Rodoviário, 10-Próximo Dia, 17-Mini Envios
+  },
 };
 
 const requestOptions = {
