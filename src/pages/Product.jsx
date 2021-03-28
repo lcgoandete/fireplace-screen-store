@@ -19,7 +19,7 @@ class Product extends React.Component {
     this.setState({ [name]: value });
   }
 
-  renderSectionCmSquare( width, height) {
+  renderSectionCmSquare(width, height) {
     return (
       <section>
         <input type="text" className="form-control" placeholder="Digite a Largura em Cm" value={ width } name="width" onChange={ this.handleChange }/>
