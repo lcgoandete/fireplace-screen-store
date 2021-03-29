@@ -20,3 +20,7 @@ const getShipping = () => {
       .then(result => mostrarFretes(result))})
     .catch(error => console.log('error -- ', error));
 }
+
+
+
+//https://melhorenvio.com.br/api/v2/calculator?from=91510000&to=78535000&width=50&weight=5&height=50&length=12&insurance_value=&services=1,2,3,4

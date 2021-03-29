@@ -1,22 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './ProductDetails.css';
 
 class ProductDetails extends React.Component {
   render() {
-    const { width, height, price, shipping } = this.props;
+    const { width, height, price } = this.props;
     return (
       <section>
-        <span>nome do produto fixo</span>
-        <span>dimensoes do produto store</span>
-        <span>preco store</span>
-        <span>frete store</span>
-        <span>total calculo</span>
+        <p>Tela grade de proteção sob medida</p>
+        <p>dimensoes { width } x { height }</p>
+        <p>R$ { price }</p>
+        <p>100,00</p>
+        <p>{ +(price) + 100 } </p>
       </section>
     );
   }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//   action: state => dispatch(action(state))});
+const mapStateToProps = (state) => ({
+  width: state.reduceProduct.width,
+  height: state.reduceProduct.height,
+  price: state.reduceProduct.price,
+});
 
-export default ProductDetails;
+export default connect(mapStateToProps)(ProductDetails);

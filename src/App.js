@@ -1,14 +1,16 @@
 import Header from './components/Header';
-import ProductScreen from './pages/ProductScreen';
-import './App.css';
 import { Switch, Route } from 'react-router';
+import ProductScreen from './pages/ProductScreen';
+import ScreenOrder from './pages/ScreenOrder';
+import './App.css';
 
 function App() {
   return (
     <div>
       <Header />
       <Switch>
-        <Route to="/" component={ ProductScreen } />
+        <Route exact path="/" component={ ProductScreen } />
+        <Route path="/order" component={ ScreenOrder } />
       </Switch>
     </div>
   );
