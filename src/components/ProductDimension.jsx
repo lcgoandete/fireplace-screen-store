@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import productImage from '../images/product_medio.jpg';
 import { calculate } from '../redux/actions/calculatePrice';
 import { handleDimension } from '../redux/actions/handleDimension';
@@ -60,7 +61,7 @@ class ProductDimension extends React.Component {
           <p>A partir de <span>{ price }</span></p>
         </form>
         <div>
-          <button type="button" >Fazer pedido</button>
+          <Link to="/order">Fazer Pedido</Link>
         </div>
       </div>
     )
