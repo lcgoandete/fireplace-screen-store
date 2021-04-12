@@ -37,10 +37,10 @@ export function getShippingList(cepDestino, width, height) {
   }
 };
 
-export const SET_SHIPPING_PRICE = 'SET_SHIPPING_PRICE';
-export function setShippingPrice(shippingPrice) {
+export const SET_SHIPPING = 'SET_SHIPPING';
+export function setShipping(shipping) {
   return {
-    type: SET_SHIPPING_PRICE,
-    shippingPrice,
+    type: SET_SHIPPING,
+    shipping,
   }
 };
