@@ -1,12 +1,15 @@
 import React from 'react';
-import './Product.css'
+
+import './css/Product.css'
 
 class Product extends React.Component {
   constructor(props) {
     super(props);
+    
     this.handleChange = this.handleChange.bind(this);
     this.renderSectionCmSquare = this.renderSectionCmSquare.bind(this);
     this.renderSectionCalculateShipping = this.renderSectionCalculateShipping.bind(this);
+    
     this.state = {
       width: 60,
       height: 60,

@@ -1,9 +1,10 @@
 import React from 'react';
+
 import Shipping from '../components/Shipping';
 import ClientData from '../components/ClientData';
 import ProductDetails from '../components/ProductDetails';
 
-class ScreenOrder extends React.Component {
+class OrderScreen extends React.Component {
   render() {
     return (
       <section>
@@ -16,4 +17,4 @@ class ScreenOrder extends React.Component {
   }
 }
 
-export default ScreenOrder;
+export default OrderScreen;

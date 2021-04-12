@@ -1,7 +1,8 @@
+import { Switch, Route } from 'react-router-dom';
+
 import Header from './components/Header';
-import { Switch, Route } from 'react-router';
 import ProductScreen from './pages/ProductScreen';
-import ScreenOrder from './pages/ScreenOrder';
+import OrderScreen from './pages/OrderScreen';
 import './App.css';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={ ProductScreen } />
-        <Route path="/order" component={ ScreenOrder } />
+        <Route path="/order" component={ OrderScreen } />
       </Switch>
     </div>
   );
