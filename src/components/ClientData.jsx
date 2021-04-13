@@ -1,5 +1,6 @@
 import React from 'react';
-import './ClientData.css'
+
+import './css/ClientData.css'
 
 class ClientData extends React.Component {
   render() {

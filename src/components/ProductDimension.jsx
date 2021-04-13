@@ -1,6 +1,8 @@
 import React from 'react';
+import { number } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import productImage from '../images/product_medio.jpg';
 import { calculate } from '../redux/actions/calculatePrice';
 import { handleDimension } from '../redux/actions/handleDimension';
@@ -8,6 +10,7 @@ import { handleDimension } from '../redux/actions/handleDimension';
 class ProductDimension extends React.Component {
   constructor(props){
     super(props);
+    
     this.validateInputs = this.validateInputs.bind(this);
   }
 
@@ -74,7 +77,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  price: state.reduceProduct.price,
+  price: state.product.price,
 });
+
+ProductDimension.propTypes = {
+  price: number,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDimension)

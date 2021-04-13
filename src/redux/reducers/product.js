@@ -3,18 +3,18 @@ import { CALCULATE_PRICE } from '../actions/calculatePrice';
 import { valorCmQuadrado } from '../../services/calculateScreen.js';
 
 const INITIAL_STATE = {
-  height: '',
-  width: '',
+  height: 0,
+  width: 0,
   price: 0,
 }
 
-export const reduceProduct = (state = INITIAL_STATE, action) => {
-  const area = +(state.height) * +(state.width);
+export const product = (state = INITIAL_STATE, action) => {
+  const area = parseInt(state.height) * parseInt(state.width);
   switch (action.type) {
     case HANDLE_DIMENSION:
-      return { ...state, [action.name]: action.value };
+      return { ...state, [action.name]: parseInt(action.value) };
     case CALCULATE_PRICE:
-      return { ...state, price: valorCmQuadrado(area) }
+      return { ...state, price: parseFloat(valorCmQuadrado(area)) }
     default:
       return state;
   }

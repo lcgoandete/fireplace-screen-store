@@ -1,13 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getShippingAPI } from '../redux/actions/shippingAPI';
-import './Shipping.css'
+
+import { getShippingList, setShippingPrice } from '../redux/actions/shipping';
+import './css/Shipping.css'
 
 class Shipping extends React.Component {
   constructor(props) {
     super(props);
+    
     this.handleChange = this.handleChange.bind(this);
     this.getState = this.getState.bind(this);
+    this.renderShippingList = this.renderShippingList.bind(this);
+    this.selectedShippingPrice = this.selectedShippingPrice.bind(this);
+    
     this.state = {
       cepDestino: '',
     };
@@ -19,15 +24,36 @@ class Shipping extends React.Component {
   }
 
   getState() {
-    const { getShipping, width, height } = this.props;
+    const { addShippingList, width, height } = this.props;
     const { cepDestino } = this.state;
-    getShipping(cepDestino, width, height);
+    addShippingList(cepDestino, width, height);
+  }
+
+  selectedShippingPrice(shippingPrice) {
+    const { addShippingPrice } = this.props;
+    addShippingPrice(parseFloat(shippingPrice));
+  }
+
+  renderShippingList() {
+    const { shippingList } = this.props;
+    if(shippingList.length > 0) {
+      return (shippingList
+        .map((shipping) => (
+          <div key={shipping.id} name="shipping">
+            <input type="radio" name="shipping" onChange={ () => this.selectedShippingPrice(shipping.price) }/>
+            <div>
+              <span>{shipping.currency} {shipping.price}</span>
+              <span>{shipping.company.name} {shipping.name}</span>
+              <span>{shipping.delivery_time} Dias</span>
+            </div>
+          </div>
+        ))
+      );
+    }
   }
 
   render() {
     const { cepDestino } = this.state;
-    const { shipping } = this.props;
-    console.log(shipping);
     return (
       <section>
         <label htmlFor="cep-shipping">
@@ -36,23 +62,21 @@ class Shipping extends React.Component {
             id="cep-shipping" value={ cepDestino } onChange={ this.handleChange } />
           <button type="button" onClick={ this.getState }>OK</button>
         </label>
-        <div>R$ 150,00 - Correios PAC    - 10 Dias</div>
-        <div>R$ 180,99 - Correios SEDEX  - 07 Dias</div>
-        <div>R$ 100,50 - JadLog .Package - 20 Dias</div>
-        <div>R$ 120,00 - JadLog .Com     - 15 Dias</div>
+        { this.renderShippingList() }
       </section>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  width: state.reduceProduct.width,
-  height: state.reduceProduct.height,
-  shipping: state.reducerShipping.shipping,
+  width: state.product.width,
+  height: state.product.height,
+  shippingList: state.shipping.shippingList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getShipping: (cepDestino, width, height) => dispatch(getShippingAPI(cepDestino, width, height)),
+  addShippingList: (cepDestino, width, height) => dispatch(getShippingList(cepDestino, width, height)),
+  addShippingPrice: (shippingPrice) => dispatch(setShippingPrice(shippingPrice)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shipping);
