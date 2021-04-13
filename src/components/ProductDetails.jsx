@@ -14,15 +14,29 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { description,  } = this.state;
+    const { description } = this.state;
     const { shipping, width, height, price } = this.props;
     return (
       <section>
         <p>{ description }</p>
-        <p>dimensoes { width } x { height }</p>
-        <p>R$ { price.toFixed(2) }</p>
-        <p>Frete: { parseFloat(shipping.price).toFixed(2) }</p>
-        <p>Total: { (price + parseFloat(shipping.price)).toFixed(2) } </p>
+        <p>
+          Dimensoes:
+          { width }
+          x
+          { height }
+        </p>
+        <p>
+          R$
+          { price.toFixed(2) }
+        </p>
+        <p>
+          Frete:
+          { parseFloat(shipping.price).toFixed(2) }
+        </p>
+        <p>
+          Total:
+          { (price + parseFloat(shipping.price)).toFixed(2) }
+        </p>
       </section>
     );
   }
@@ -40,6 +54,6 @@ ProductDetails.propTypes = {
   height: number,
   price: number,
   shipping: object,
-};
+}.isRequired;
 
 export default connect(mapStateToProps)(ProductDetails);

@@ -4,11 +4,11 @@ import ProductDimension from '../components/ProductDimension';
 
 class ProductScreen extends React.Component {
   render() {
-    return(
+    return (
       <section>
         <ProductDimension />
       </section>
-    )
+    );
   }
 }
 

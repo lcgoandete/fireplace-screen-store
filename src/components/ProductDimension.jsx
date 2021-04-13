@@ -1,5 +1,5 @@
 import React from 'react';
-import { number } from 'prop-types';
+import { number, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -8,29 +8,33 @@ import { calculate } from '../redux/actions/calculatePrice';
 import { handleDimension } from '../redux/actions/handleDimension';
 
 class ProductDimension extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    
+
     this.validateInputs = this.validateInputs.bind(this);
   }
 
-  validateInputs({ target: { value, name } }){
-    const { handleDimension } = this.props;
+  validateInputs({ target: { value, name } }) {
+    const { addHandleDimension } = this.props;
+    const widthMin = 20;
+    const widthMax = 120;
+    const heightMin = 20;
+    const heightMax = 80;
     switch (true) {
-      case ((value < 20 || value > 120) && name === 'width'):
-        window.alert('Dimensão de largura deve ser entre 20 e 120 cm');
-        break;
-      case ((value < 20 || value > 80) && name === 'height'):
-        window.alert('Dimensão de altura deve ser entre 20 e 80 cm');
-        break;
-      default:
-        handleDimension(value, name);
+    case ((value < widthMin || value > widthMax) && name === 'width'):
+      window.alert('Dimensão de largura deve ser entre 20 e 120 cm');
+      break;
+    case ((value < heightMin || value > heightMax) && name === 'height'):
+      window.alert('Dimensão de altura deve ser entre 20 e 80 cm');
+      break;
+    default:
+      addHandleDimension(value, name);
     }
   }
 
   render() {
     const { price, calculatePrice } = this.props;
-    return(
+    return (
       <div>
         <h1>Tela grade de proteção para lareira (sob medida)</h1>
         <img src={ productImage } alt="Imagem de uma tela de proteção para lareira" />
@@ -38,8 +42,6 @@ class ProductDimension extends React.Component {
           <label htmlFor="height">
             Altura:
             <input
-              min={20}
-              max={80}
               type="number"
               name="height"
               placeholder="Digite a altura"
@@ -49,8 +51,6 @@ class ProductDimension extends React.Component {
           <label htmlFor="width">
             Largura:
             <input
-              min={20}
-              max={120}
               type="number"
               name="width"
               placeholder="Digite a largura"
@@ -60,20 +60,27 @@ class ProductDimension extends React.Component {
           <button
             type="button"
             onClick={ calculatePrice }
-          >Calcular</button>
-          <p>A partir de <span>{ price }</span></p>
+          >
+            Calcular
+          </button>
+          <p>
+            A partir de
+            <span>
+              { price }
+            </span>
+          </p>
         </form>
         <div>
           <Link to="/order">Fazer Pedido</Link>
         </div>
       </div>
-    )
+    );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleDimension: (value, name) => dispatch(handleDimension(name, value)),
-  calculatePrice: () => dispatch(calculate())
+  addHandleDimension: (value, name) => dispatch(handleDimension(name, value)),
+  calculatePrice: () => dispatch(calculate()),
 });
 
 const mapStateToProps = (state) => ({
@@ -82,6 +89,8 @@ const mapStateToProps = (state) => ({
 
 ProductDimension.propTypes = {
   price: number,
-};
+  calculatePrice: func,
+  handleDimension: func,
+}.isRequired;
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDimension)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDimension);
