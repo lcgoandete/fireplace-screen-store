@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getShippingList, setShippingPrice } from '../redux/actions/shipping';
+import { getShippingList, setShipping } from '../redux/actions/shipping';
 import './css/Shipping.css'
 
 class Shipping extends React.Component {
@@ -11,7 +11,7 @@ class Shipping extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.getState = this.getState.bind(this);
     this.renderShippingList = this.renderShippingList.bind(this);
-    this.selectedShippingPrice = this.selectedShippingPrice.bind(this);
+    this.selectedShipping = this.selectedShipping.bind(this);
     
     this.state = {
       cepDestino: '',
@@ -29,9 +29,9 @@ class Shipping extends React.Component {
     addShippingList(cepDestino, width, height);
   }
 
-  selectedShippingPrice(shippingPrice) {
-    const { addShippingPrice } = this.props;
-    addShippingPrice(parseFloat(shippingPrice));
+  selectedShipping(shipping) {
+    const { addShipping } = this.props;
+    addShipping(shipping);
   }
 
   renderShippingList() {
@@ -40,7 +40,7 @@ class Shipping extends React.Component {
       return (shippingList
         .map((shipping) => (
           <div key={shipping.id} name="shipping">
-            <input type="radio" name="shipping" onChange={ () => this.selectedShippingPrice(shipping.price) }/>
+            <input type="radio" name="shipping" onChange={ () => this.selectedShipping(shipping) }/>
             <div>
               <span>{shipping.currency} {shipping.price}</span>
               <span>{shipping.company.name} {shipping.name}</span>
@@ -76,7 +76,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addShippingList: (cepDestino, width, height) => dispatch(getShippingList(cepDestino, width, height)),
-  addShippingPrice: (shippingPrice) => dispatch(setShippingPrice(shippingPrice)),
+  addShipping: (shipping) => dispatch(setShipping(shipping)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shipping);
