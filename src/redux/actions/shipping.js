@@ -8,19 +8,19 @@ export const REQUEST_SHIPPING_LIST = 'REQUEST_SHIPPING_LIST';
 export const RECEIVE_SHIPPING_LIST = 'RECEIVE_SHIPPING_LIST';
 
 const requestShippingList = () => ({
-  type: REQUEST_SHIPPING_LIST});
+  type: REQUEST_SHIPPING_LIST });
 
 const receiveShippingList = (shippingList) => ({
   type: RECEIVE_SHIPPING_LIST,
-  shippingList
+  shippingList,
 });
 
 const productData = {
-  cepOrigem: "91510000",
+  cepOrigem: '91510000',
   weight: 5,
   productLength: 12,
   insuranceValue: 0,
-  services: "1,2,3,4" // 9-Rodoviário, 10-Próximo Dia, 17-Mini Envios
+  services: '1,2,3,4', // 9-Rodoviário, 10-Próximo Dia, 17-Mini Envios
 };
 
 const { cepOrigem, weight, productLength, services } = productData;
@@ -34,13 +34,13 @@ export function getShippingList(cepDestino, width, height) {
     } catch (error) {
       console.log(error);
     }
-  }
-};
+  };
+}
 
 export const SET_SHIPPING = 'SET_SHIPPING';
 export function setShipping(shipping) {
   return {
     type: SET_SHIPPING,
     shipping,
-  }
-};
+  };
+}

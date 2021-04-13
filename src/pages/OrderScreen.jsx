@@ -9,10 +9,10 @@ import ProductDetails from '../components/ProductDetails';
 class OrderScreen extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.createOrder = this.createOrder.bind(this); 
+
+    this.createOrder = this.createOrder.bind(this);
   }
-  
+
   createOrder() {
     const { product, shipping, dataClient } = this.props;
     const orderData = {};
@@ -29,7 +29,7 @@ class OrderScreen extends React.Component {
         <Shipping />
         <form>
           <DataClient />
-          <button type="button" onClick={ this.createOrder }>Finalizar Pedido</button>
+          <button type="button" onClick={ this.createOrder }>Gerar Pedido</button>
         </form>
       </section>
     );
@@ -46,6 +46,6 @@ OrderScreen.propTypes = {
   product: object,
   shipping: object,
   dataClient: object,
-};
+}.isRequired;
 
 export default connect(mapStateToProps)(OrderScreen);

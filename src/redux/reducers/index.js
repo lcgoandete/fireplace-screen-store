@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import { product } from './product';
-import { shipping } from './shipping';
-import { dataClient } from './dataClient';
+import product from './product';
+import shipping from './shipping';
+import dataClient from './dataClient';
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   product,
   shipping,
   dataClient,
 });
+
+export default rootReducer;

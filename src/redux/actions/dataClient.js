@@ -4,5 +4,5 @@ export function setDataClient(dataClient) {
   return {
     type: SET_DATA_CLIENT,
     dataClient,
-  }
-};
+  };
+}
