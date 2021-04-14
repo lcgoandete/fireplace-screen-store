@@ -1,15 +1,16 @@
 import React from 'react';
-import { number, func } from 'prop-types';
 import { connect } from 'react-redux';
+import { number, func } from 'prop-types';
 
-import { getShippingList, setShipping } from '../redux/actions/shipping';
 import './css/Shipping.css';
+import { handleZipMask } from '../services/inputMasks';
+import { getShippingList, setShipping } from '../redux/actions/shipping';
 
 class Shipping extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChanges = this.handleChanges.bind(this);
     this.getShippingList = this.getShippingList.bind(this);
     this.renderShippingList = this.renderShippingList.bind(this);
     this.selectedShipping = this.selectedShipping.bind(this);
@@ -19,8 +20,8 @@ class Shipping extends React.Component {
     };
   }
 
-  handleChange(event) {
-    const { value } = event.target;
+  handleChanges({ target }) {
+    const { value } = target;
     this.setState({ cepDestino: value });
   }
 
@@ -74,7 +75,9 @@ class Shipping extends React.Component {
             name="cepDestino"
             id="cep-shipping"
             value={ cepDestino }
-            onChange={ this.handleChange }
+            onChange={ this.handleChanges }
+            onKeyUp={ handleZipMask }
+            placeholder="99999-999"
           />
           <button type="button" onClick={ this.getShippingList }>OK</button>
         </label>
