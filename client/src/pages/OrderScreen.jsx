@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { object } from 'prop-types';
+import { connect } from 'react-redux';
 
 import Shipping from '../components/Shipping';
 import DataClient from '../components/DataClient';
@@ -11,6 +11,11 @@ class OrderScreen extends React.Component {
     super(props);
 
     this.createOrder = this.createOrder.bind(this);
+    this.test = this.test.bind(this);
+
+    this.state = {
+      mercadoId: '',
+    };
   }
 
   createOrder() {
@@ -22,14 +27,25 @@ class OrderScreen extends React.Component {
     console.log(orderData);
   }
 
+  async test() {
+    const response = await fetch('/api/mensagem');
+    const obj = await response.json();
+    this.setState({
+      mercadoId: obj.express,
+    });
+  }
+
   render() {
+    const { mercadoId } = this.state;
     return (
       <section>
         <ProductDetails />
         <Shipping />
         <form>
           <DataClient />
-          <button type="button" onClick={ this.createOrder }>Gerar Pedido</button>
+          <a href={ mercadoId }>
+            <button type="button" onClick={ this.test() }>Gerar Pedido</button>
+          </a>
         </form>
       </section>
     );
