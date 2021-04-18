@@ -2,7 +2,6 @@ import React from 'react';
 import { object } from 'prop-types';
 import { connect } from 'react-redux';
 
-// import mercadopago from 'mercadopago';
 import Shipping from '../components/Shipping';
 import DataClient from '../components/DataClient';
 import ProductDetails from '../components/ProductDetails';
@@ -17,10 +16,6 @@ class OrderScreen extends React.Component {
     this.state = {
       mercadoId: '',
     };
-  }
-
-  componentDidMount() {
-    // this.test();
   }
 
   createOrder() {

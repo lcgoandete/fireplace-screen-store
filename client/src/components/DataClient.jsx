@@ -2,8 +2,9 @@ import React from 'react';
 import { func } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setDataClient } from '../redux/actions/dataClient';
 import './css/ClientData.css';
+import { handleZipMask, handlePhoneMask } from '../services/inputMasks';
+import { setDataClient } from '../redux/actions/dataClient';
 
 class DataClient extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class DataClient extends React.Component {
 
   render() {
     const { fullName, email, cellPhone, street, number,
-      district, zipCode, city, state } = this.state;
+      district, cep, city, state } = this.state;
     return (
       <section className="client-data">
         <label htmlFor="full-name">
@@ -52,7 +53,7 @@ class DataClient extends React.Component {
         </label>
         <label htmlFor="cellPhone">
           Telefone Celular:
-          <input className="input-client-data" type="text" name="cellPhone" id="cellPhone" value={ cellPhone } onChange={ this.handleChanges } required />
+          <input className="input-client-data" type="text" name="cellPhone" id="cellPhone" value={ cellPhone } onChange={ this.handleChanges } onKeyUp={ handlePhoneMask } placeholder="(99) 99999-9999" required />
         </label>
         <label htmlFor="street">
           Logradouro:
@@ -68,7 +69,7 @@ class DataClient extends React.Component {
         </label>
         <label htmlFor="zipCode">
           Cep:
-          <input className="input-client-data" type="text" name="zipCode" id="zipCode" value={ zipCode } onChange={ this.handleChanges } required />
+          <input className="input-client-data" type="text" name="zipCode" id="zipCode" value={ cep } onChange={ this.handleChanges } onKeyUp={ handleZipMask } placeholder="99999-999" required />
         </label>
         <label htmlFor="city">
           Cidade:
