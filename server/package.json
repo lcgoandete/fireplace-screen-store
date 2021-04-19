@@ -7,8 +7,10 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.16.2",
-    "mercadopago": "^1.5.7"
+    "mercadopago": "^1.5.7",
+    "nodemailer": "^6.5.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
