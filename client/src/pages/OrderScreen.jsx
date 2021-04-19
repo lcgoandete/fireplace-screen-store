@@ -28,24 +28,39 @@ class OrderScreen extends React.Component {
   }
 
   async test() {
-    const response = await fetch('/api/mensagem');
-    const obj = await response.json();
-    this.setState({
-      mercadoId: obj.express,
-    });
+    // const method = {
+    //   method: 'POST',
+    //   headers: {
+    //     ContentType: 'application/json',
+    //   },
+    // };
+
+    // const preference = {
+    //   description: 'Torinari no Totoro',
+    //   price: 100,
+    //   quantity: 1,
+    // };
+
+    // const response = await fetch('/mercadopago/create_preference', method, preference);
+    // const obj = await response.json();
+    // console.log(obj);
+    // // this.setState({
+    // //   mercadoId: obj.checkout,
+    // // });
   }
 
   render() {
     const { mercadoId } = this.state;
+    console.log(mercadoId);
     return (
       <section>
         <ProductDetails />
         <Shipping />
         <form>
           <DataClient />
-          <a href={ mercadoId }>
-            <button type="button" onClick={ this.test() }>Gerar Pedido</button>
-          </a>
+          {/* <a href={ mercadoId }> */}
+          <button type="button" onClick={ this.createOrder() }>Gerar Pedido</button>
+          {/* </a> */}
         </form>
       </section>
     );
