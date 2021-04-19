@@ -37,7 +37,7 @@ class ProductDimension extends React.Component {
     return (
       <div>
         <h1>Tela grade de proteção para lareira (sob medida)</h1>
-        <img src={ productImage } alt="Imagem de uma tela de proteção para lareira" />
+        <img src={ productImage } alt="Tela de proteção para lareira" />
         <form>
           <label htmlFor="height">
             Altura:
