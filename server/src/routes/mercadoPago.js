@@ -1,9 +1,10 @@
 const express = require('express');
+require('dotenv').config({ path: '/media/luis/aedf32cc-1156-43d9-b76c-230deae99328/luis/projetos/vscode/fireplace-screen-store/server/src/.env' });
 
 const router = express.Router();
 const mercadopago = require('mercadopago');
 
-mercadopago.configurations.setAccessToken('TEST-3541797668710150-121817-98503e1057f200f6ca8e909e3a39b4f2-6024630');
+mercadopago.configurations.setAccessToken(process.env.ACCESS_TOKEN);
 
 
 router.use(express.json());
