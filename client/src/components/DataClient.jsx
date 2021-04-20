@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import './css/ClientData.css';
 import { handleZipMask, handlePhoneMask } from '../services/inputMasks';
 import { setDataClient } from '../redux/actions/dataClient';
+import { verifyName, verifyEmail, verifyPhone, verifyAddress, verifyNumber,
+  verifyDistrict, verifyCep, verifyCity, verifyState } from '../services/verifyInputs';
 
 class DataClient extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleChanges = this.handleChanges.bind(this);
-    this.getDataClient = this.getDataClient.bind(this);
 
     this.state = {
       fullName: '',
@@ -23,6 +24,7 @@ class DataClient extends React.Component {
       zipCode: '',
       city: '',
       state: '',
+      disableButton: true,
     };
   }
 
@@ -30,12 +32,33 @@ class DataClient extends React.Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
-    }, () => this.getDataClient());
+    }, () => this.validateContent());
   }
 
-  getDataClient() {
+  validateContent() {
     const { addDataClient } = this.props;
-    addDataClient(this.state);
+    const { fullName, email, cellPhone, street, number,
+      district, cep, city, state } = this.state;
+    const validName = verifyName(fullName);
+    const validEmail = verifyEmail(email);
+    const validPhone = verifyPhone(cellPhone);
+    const validAddress = verifyAddress(street);
+    const validNumber = verifyNumber(number);
+    const validDistrict = verifyDistrict(district);
+    const validCep = verifyCep(cep);
+    const validCity = verifyCity(city);
+    const validState = verifyState(state);
+    const isValid = (validName && validEmail && validPhone && validAddress && validNumber
+      && validDistrict && validCep && validCity && validState);
+    if (isValid) {
+      this.setState({
+        disableButton: false,
+      }, () => addDataClient(this.state));
+    } else {
+      this.setState({
+        disableButton: true,
+      }, () => addDataClient(this.state));
+    }
   }
 
   render() {
@@ -88,8 +111,14 @@ const mapDispatchToProps = (dispatch) => ({
   addDataClient: (dataClient) => dispatch(setDataClient(dataClient)),
 });
 
+const mapStateToProps = (state) => ({
+  shipping: state.shipping.shipping,
+  product: state.product,
+  dataClient: state.dataClient.dataClient,
+});
+
 DataClient.propTypes = {
   addDataClient: func,
 }.isRequired;
 
-export default connect(null, mapDispatchToProps)(DataClient);
+export default connect(mapStateToProps, mapDispatchToProps)(DataClient);
