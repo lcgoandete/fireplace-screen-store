@@ -1,7 +1,9 @@
 const express = require('express');
-
 const nodemailer = require('nodemailer');
-require('dotenv').config({ path: '/media/luis/aedf32cc-1156-43d9-b76c-230deae99328/luis/projetos/vscode/fireplace-screen-store/server/src/.env' });
+const path = require('path');
+
+const dirEnv = path.join(__dirname, '../.env');
+require('dotenv').config({ path: dirEnv });
 
 const router = express.Router();
 
