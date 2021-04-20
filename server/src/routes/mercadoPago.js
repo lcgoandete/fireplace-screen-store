@@ -1,14 +1,16 @@
 const express = require('express');
+const path = require('path');
+
+const dirEnv = path.join(__dirname, '../.env');
+require('dotenv').config({ path: dirEnv });
 
 const router = express.Router();
 const mercadopago = require('mercadopago');
 
-mercadopago.configurations.setAccessToken('TEST-3541797668710150-121817-98503e1057f200f6ca8e909e3a39b4f2-6024630');
-
+mercadopago.configurations.setAccessToken(process.env.ACCESS_TOKEN);
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
-
 
 router.post('/test', (req, resp) => {
   console.log(req.body.description)

@@ -4,7 +4,7 @@ const mercadopago = require('mercadopago');
 const preferenceId = () => {
   // Configura credenciais
   mercadopago.configure({
-    access_token: 'TEST-3541797668710150-121817-98503e1057f200f6ca8e909e3a39b4f2-6024630',
+    access_token: '',
   });
 
   // Cria um objeto de preferência
