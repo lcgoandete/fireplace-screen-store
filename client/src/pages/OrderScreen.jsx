@@ -3,6 +3,7 @@ import React from 'react';
 import Shipping from '../components/Shipping';
 import DataClient from '../components/DataClient';
 import ProductDetails from '../components/ProductDetails';
+import ButtonMP from '../components/ButtonMP';
 
 class OrderScreen extends React.Component {
   render() {
@@ -12,6 +13,7 @@ class OrderScreen extends React.Component {
         <Shipping />
         <form>
           <DataClient />
+          <ButtonMP />
         </form>
       </section>
     );

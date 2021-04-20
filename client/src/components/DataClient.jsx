@@ -1,5 +1,5 @@
 import React from 'react';
-import { func, object } from 'prop-types';
+import { func } from 'prop-types';
 import { connect } from 'react-redux';
 
 import './css/ClientData.css';
@@ -13,8 +13,6 @@ class DataClient extends React.Component {
     super(props);
 
     this.handleChanges = this.handleChanges.bind(this);
-    this.getDataClient = this.getDataClient.bind(this);
-    this.createOrder = this.createOrder.bind(this);
 
     this.state = {
       fullName: '',
@@ -34,24 +32,11 @@ class DataClient extends React.Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
-    }, () => this.getDataClient());
-  }
-
-  getDataClient() {
-    const { addDataClient } = this.props;
-    addDataClient(this.state);
-    this.validateContent();
-  }
-
-  createOrder() {
-    const { product, shipping, dataClient } = this.props;
-    const orderData = {};
-    orderData.product = product;
-    orderData.shipping = shipping;
-    orderData.dataClient = dataClient;
+    }, () => this.validateContent());
   }
 
   validateContent() {
+    const { addDataClient } = this.props;
     const { fullName, email, cellPhone, street, number,
       district, cep, city, state } = this.state;
     const validName = verifyName(fullName);
@@ -68,17 +53,17 @@ class DataClient extends React.Component {
     if (isValid) {
       this.setState({
         disableButton: false,
-      });
+      }, () => addDataClient(this.state));
     } else {
       this.setState({
         disableButton: true,
-      });
+      }, () => addDataClient(this.state));
     }
   }
 
   render() {
     const { fullName, email, cellPhone, street, number,
-      district, cep, city, state, disableButton } = this.state;
+      district, cep, city, state } = this.state;
     return (
       <section className="client-data">
         <label htmlFor="full-name">
@@ -117,7 +102,6 @@ class DataClient extends React.Component {
           Estado:
           <input className="input-client-data" type="text" name="state" id="state" value={ state } onChange={ this.handleChanges } required />
         </label>
-        <button type="button" onClick={ this.createOrder() } disabled={ disableButton }>Gerar Pedido</button>
       </section>
     );
   }
@@ -135,9 +119,6 @@ const mapStateToProps = (state) => ({
 
 DataClient.propTypes = {
   addDataClient: func,
-  product: object,
-  shipping: object,
-  dataClient: object,
 }.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataClient);
