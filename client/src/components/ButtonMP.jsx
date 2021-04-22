@@ -8,12 +8,14 @@ class ButtonMP extends Component {
     super(props);
     this.createOrder = this.createOrder.bind(this);
     this.requestLink = this.requestLink.bind(this);
+    this.isValid = this.isValid.bind(this);
   }
 
   createOrder() {
     const { product, shipping, dataClient } = this.props;
     product.description = `Grade de lareira ${product.height}X${product.width}`;
     product.quantity = 1;
+    product.price = +(product.price);
     const orderData = {
       product,
       shipping,
@@ -22,14 +24,22 @@ class ButtonMP extends Component {
     return orderData;
   }
 
+  isValid() {
+    const { shipping } = this.props;
+    return Object.keys(shipping).length < 1;
+  }
+
   async requestLink() {
+    if (this.isValid()) {
+      alert('Preencha o campo do frete');
+      return;
+    }
     const order = this.createOrder();
     console.log('oi');
     try {
-      const response = await axios.post('/mercadopago/create_preference', { order });
-      console.log(response.data.checkout);
-      // const obj = await response.json();
-      // console.log(obj);
+      const response = await axios.post('http://localhost:5000/mercadopago/create_preference', { order });
+      const obj = await response.json();
+      console.log(obj);
     } catch (error) {
       console.log(error);
     }

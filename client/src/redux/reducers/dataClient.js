@@ -1,6 +1,8 @@
 import { SET_DATA_CLIENT } from '../actions/dataClient';
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  disableButton: true,
+};
 
 function dataClient(state = INITIAL_STATE, action) {
   switch (action.type) {
