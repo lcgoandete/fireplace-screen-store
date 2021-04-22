@@ -1,17 +1,29 @@
-export const verifyName = (name) => /[\D]{3,}\s[\D]{3,}/.test(name);
+const fullName = (name) => /[\D]{3,}\s[\D]{3,}/.test(name);
 
-export const verifyEmail = (email) => /^[\w]+@[a-z]+\.\w{2,3}$/.test(email);
+const email = (emailValue) => /^[\w]+@[a-z]+\.[a-z]{2,3}$/.test(emailValue);
 
-export const verifyPhone = (phone) => /[\d]{11}/.test(phone);
+const cellPhone = (phone) => /^\([\d]{2}\)\s[\d]{5}-[\d]{4}/.test(phone);
 
-export const verifyAddress = (address) => /[\w]{5,}/.test(address);
+const street = (address) => /[\w]{5,}/.test(address);
 
-export const verifyNumber = (number) => /[\d\w]+/.test(number);
+const number = (numberValue) => /[\d\w]+/.test(numberValue);
 
-export const verifyDistrict = (district) => /[\w]+/.test(district);
+const district = (districtValue) => /[\w]+/.test(districtValue);
 
-export const verifyCep = (cep) => /[\w]{8}/.test(cep);
+const zipCode = (cep) => /[\d]{5}-[\d]{3}/.test(cep);
 
-export const verifyCity = (city) => /[\w]{3,}/.test(city);
+const city = (cityValue) => /[\w]{3,}/.test(cityValue);
 
-export const verifyState = (state) => /[\w]{2,}/.test(state);
+const state = (stateValue) => /[\w]{2,}/.test(stateValue);
+
+export default {
+  fullName,
+  email,
+  cellPhone,
+  street,
+  number,
+  district,
+  zipCode,
+  city,
+  state,
+};

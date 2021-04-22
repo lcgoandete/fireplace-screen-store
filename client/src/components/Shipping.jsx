@@ -5,6 +5,7 @@ import { number, func } from 'prop-types';
 import './css/Shipping.css';
 import { handleZipMask } from '../services/inputMasks';
 import { getShippingList, setShipping } from '../redux/actions/shipping';
+import verify from '../services/verifyInputs';
 
 class Shipping extends React.Component {
   constructor(props) {
@@ -21,19 +22,36 @@ class Shipping extends React.Component {
   }
 
   handleChanges({ target }) {
+    handleZipMask(target);
     const { value } = target;
-    this.setState({ cepDestino: value });
+    this.setState({ cepDestino: value }, () => this.verifyCep(target));
   }
 
   getShippingList() {
     const { addShippingList, width, height } = this.props;
     const { cepDestino } = this.state;
-    addShippingList(cepDestino, width, height);
+    if (!verify.zipCode(cepDestino)) {
+      alert('Preencha o cep');
+    } else {
+      addShippingList(cepDestino, width, height);
+    }
+  }
+
+  verifyCep(target) {
+    if (verify.zipCode(target.value)) {
+      target.classList.remove('invalid');
+    }
   }
 
   selectedShipping(shipping) {
     const { addShipping } = this.props;
     addShipping(shipping);
+  }
+
+  feedbackInput({ target }) {
+    if (!verify.zipCode(target.value)) {
+      target.classList.add('invalid');
+    }
   }
 
   renderShippingList() {
@@ -76,7 +94,7 @@ class Shipping extends React.Component {
             id="cep-shipping"
             value={ cepDestino }
             onChange={ this.handleChanges }
-            onKeyUp={ handleZipMask }
+            onBlur={ this.feedbackInput }
             placeholder="99999-999"
           />
           <button type="button" onClick={ this.getShippingList }>OK</button>
