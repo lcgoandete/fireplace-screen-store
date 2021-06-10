@@ -26,6 +26,11 @@ router.post('/create_preference', (req, res) => {
   });
 
   let preference = {
+    items: [{
+      title: req.body.order.product.description,
+      unit_price: Number(req.body.order.product.price),
+      quantity: Number(req.body.order.product.quantity),
+    }],
     back_urls: {
       "success": "http://localhost:3000/",
       "failure": "http://localhost:3000/",

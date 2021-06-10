@@ -13,3 +13,7 @@
   left: 5px;
   top: 14px;
 }
+
+.invalid {
+  border: 2px solid red;
+}
